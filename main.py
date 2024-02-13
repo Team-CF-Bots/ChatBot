@@ -1,13 +1,3 @@
-#
-# Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/YukkiChatBot >.
-#
-# This file is part of < https://github.com/TeamYukki/YukkiChatBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiChatBot/blob/master/LICENSE >
-#
-# All rights reserved.
-#
-
 import asyncio
 from sys import version as pyver
 
@@ -53,7 +43,7 @@ async def init():
             return await message.reply_text(
                 "MONGO_DB_URI var not defined. Please define it first"
             )
-        usage = "**Usage:**\n\n/mode [group | private]\n\n**Group**: All the incoming messages will be forwarded to Log group.\n\n**Private**: All the incoming messages will be forwarded to the Private Messages of SUDO_USERS"
+        usage = "**Usage:**\n\n/mode [group | private]\n\n**Group**: ʟᴏɢs ᴍᴇ ʙʜᴇᴊ ᴅɪʏᴀ sᴀʙ.\n\n**Private**: sᴜᴅᴏ ᴋᴏ ʙʜᴇᴊ ᴅɪʏᴀ sᴀʙ ᴍᴀɪɴᴇ SUDO_USERS"
         if len(message.command) != 2:
             return await message.reply_text(usage)
         state = message.text.split(None, 1)[1].strip()
@@ -61,12 +51,12 @@ async def init():
         if state == "group":
             await mongo.group_on()
             await message.reply_text(
-                "Group Mode Enabled. All the incoming messages will be forwarded to LOG Group"
+                "ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ᴇɴᴀʙʟᴇᴅ. ᴀʟʟ ᴛʜᴇ ɪɴᴄᴏᴍɪɴɢ ᴍᴇssᴀɢᴇs ᴡɪʟʟ ʙᴇ ғᴏʀᴡᴀʀᴅᴇᴅ ᴛᴏ ʟᴏɢ ɢʀᴏᴜᴘ"
             )
         elif state == "private":
             await mongo.group_off()
             await message.reply_text(
-                "Private Mode Enabled. All the incoming messages will be forwarded to Private Message of all SUDO_USERs"
+                "ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ᴇɴᴀʙʟᴇᴅ. ᴀʟʟ ᴛʜᴇ ɪɴᴄᴏᴍɪɴɢ ᴍᴇssᴀɢᴇs ᴡɪʟʟ ʙᴇ ғᴏʀᴡᴀʀᴅᴇᴅ ᴛᴏ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇ ᴏғ ᴀʟʟ SUDO_USERs"
             )
         else:
             await message.reply_text(usage)
@@ -77,7 +67,7 @@ async def init():
     async def block_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI ᴠᴀʀ ɴᴏᴛ ᴅᴇғɪɴᴇᴅ. ᴘʟᴇᴀsᴇ ᴅᴇғɪɴᴇ ɪᴛ ғɪʀsᴛ"
             )
         if message.reply_to_message:
             if not message.reply_to_message.forward_sender_name:
@@ -90,23 +80,23 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "ᴇʀʀᴏʀ ʜᴀɪ ʏʀ ʟᴏɢs ᴄʜᴇᴄᴋ ᴋᴀʀᴏ"
                 )
             if await mongo.is_banned_user(replied_user_id):
-                return await message.reply_text("Already Blocked")
+                return await message.reply_text("ʙʟᴏᴄᴋ ʜᴀɪ ᴀʟʀᴇᴀᴅʏ ʏᴇ ᴍᴀᴅᴀʀᴄʜᴏᴅ")
             else:
                 await mongo.add_banned_user(replied_user_id)
-                await message.reply_text("Banned User from The Bot")
+                await message.reply_text("ᴀʙᴇ ʏᴇ ʙᴇʜᴇɴ ᴋᴀ ʟᴀᴜʀᴀ ʙᴀɴ ʜᴀɪ ʙᴏᴛ sᴇ")
                 try:
                     await app.send_message(
                         replied_user_id,
-                        "You're now banned from using the Bot by admins.",
+                        "ʙᴀɴ ʜᴏ ʙʜᴀɪ ʙᴏᴛ ᴋᴇ ᴏᴡɴᴇʀ sᴇ ʙᴀᴀᴛ ᴋᴀʀᴏ ᴊᴀᴋᴇ.",
                     )
                 except:
                     pass
         else:
             return await message.reply_text(
-                "Reply to a user's forwarded message to block him from using the bot"
+                "ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ's ғᴏʀᴡᴀʀᴅᴇᴅ ᴍᴇssᴀɢᴇ ᴛᴏ ʙʟᴏᴄᴋ ʜɪᴍ ғʀᴏᴍ ᴜsɪɴɢ ᴛʜᴇ ʙᴏᴛ"
             )
 
     @app.on_message(
@@ -115,7 +105,7 @@ async def init():
     async def unblock_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI ᴠᴀʀ ɴᴏᴛ ᴅᴇғɪɴᴇᴅ. ᴘʟᴇᴀsᴇ ᴅᴇғɪɴᴇ ɪᴛ ғɪʀsᴛ"
             )
         if message.reply_to_message:
             if not message.reply_to_message.forward_sender_name:
@@ -128,10 +118,10 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "ᴇʀʀᴏʀ ʜᴀɪ ʏʀ ʟᴏɢs ᴄʜᴇᴄᴋ ᴋᴀʀᴏ"
                 )
             if not await mongo.is_banned_user(replied_user_id):
-                return await message.reply_text("Already UnBlocked")
+                return await message.reply_text("ᴜɴʙᴀɴ ᴋᴀʀ ᴅɪʏᴀ ᴊᴀᴀ")
             else:
                 await mongo.remove_banned_user(replied_user_id)
                 await message.reply_text(
@@ -140,13 +130,13 @@ async def init():
                 try:
                     await app.send_message(
                         replied_user_id,
-                        "You're now unbanned from the Bot by admins.",
+                        "ᴊᴀᴀ ᴍᴀғғ ᴋɪʏᴀ.",
                     )
                 except:
                     pass
         else:
             return await message.reply_text(
-                "Reply to a user's forwarded message to unblock him from the bot"
+                "ᴏᴋᴀʏ ᴜɴʙʟᴏᴄᴋ ᴋᴀʀ ᴅᴇɴɢᴇ"
             )
 
     @app.on_message(
@@ -155,7 +145,7 @@ async def init():
     async def stats_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI ᴠᴀʀ ɴᴏᴛ ᴅᴇғɪɴᴇᴅ. ᴘʟᴇᴀsᴇ ᴅᴇғɪɴᴇ ɪᴛ ғɪʀsᴛ"
             )
         served_users = len(await mongo.get_served_users())
         blocked = await mongo.get_banned_count()
@@ -174,7 +164,7 @@ async def init():
     async def broadcast_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI ᴠᴀʀ ɴᴏᴛ ᴅᴇғɪɴᴇᴅ. ᴘʟᴇᴀsᴇ ᴅᴇғɪɴᴇ ɪᴛ ғɪʀsᴛ"
             )
         if message.reply_to_message:
             x = message.reply_to_message.message_id
@@ -236,7 +226,7 @@ async def init():
                 except Exception as e:
                     print(e)
                     return await message.reply_text(
-                        "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                        "ᴇʀʀᴏʀ ʜᴀɪ ʏʀ ʟᴏɢs ᴄʜᴇᴄᴋ ᴋᴀʀᴏ"
                     )
                 try:
                     return await app.copy_message(
@@ -292,7 +282,7 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "ᴇʀʀᴏʀ ʜᴀɪ ʏʀ ʟᴏɢs ᴄʜᴇᴄᴋ ᴋᴀʀᴏ"
                 )
             try:
                 return await app.copy_message(
@@ -303,10 +293,10 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to send the message, User might have blocked the bot or something wrong happened. Please check logs"
+                    "ᴇʀʀᴏʀ ʜᴀɪ ʏʀ ʟᴏɢs ᴄʜᴇᴄᴋ ᴋᴀʀᴏ"
                 )
 
-    print("[LOG] - Yukki Chat Bot Started")
+    print("[LOG] - ʟɪʟʏ ᴄʜᴀᴛ ʙᴏᴛ sᴛᴀʀᴛᴇᴅ")
     await idle()
 
 
